@@ -15,11 +15,15 @@ namespace Calculadora
     {
         public int divide(int a, int b)
         {
-           if (b != 0)
+            try
             {
-                return a / b;
+                return safeDivision(a, b);
             }
-            return 0;
+            catch (DivideByZeroException e)
+            {
+                return -1;
+            }
+           
         }
 
         public int multiplication(int a, int b)
@@ -32,10 +36,19 @@ namespace Calculadora
             return a - b;
         }
 
-        int iServicoCalculadora.sum(int a, int b)
+        public int sum(int a, int b)
         {
             return a + b;
-        }        
+        }   
+        
+        private int safeDivision(int a, int b)
+        {
+            if (b == 0)
+            {
+                throw new System.DivideByZeroException();
+            }
+            return a / b;
+        }  
 
     }
 }
